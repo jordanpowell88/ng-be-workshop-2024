@@ -18,10 +18,11 @@
       "description": "The directory to create the util lib in",
       "enum": ["movies", "api", "shared"],
       "x-prompt": {
-        "message": "What directory would you like to create the util lib in (movies, api or shared)?",
+        "message": "What directory would you like to create the util lib in?",
         "type": "enum",
-        "options": ["movies", "api", "shared"]
-      }
+        "options": ["api", "movies", "app", "shared"]
+      },
+      "enums": ["api", "movies", "app", "shared"]
     }
   },
   "required": ["name", "directory"]

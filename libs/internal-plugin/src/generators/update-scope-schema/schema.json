@@ -3,15 +3,6 @@
   "$id": "UpdateScopeSchema",
   "title": "",
   "type": "object",
-  "properties": {
-    "name": {
-      "type": "string",
-      "description": "",
-      "$default": {
-        "$source": "argv",
-        "index": 0
-      }
-    }
-  },
+  "properties": {},
   "required": []
 }
