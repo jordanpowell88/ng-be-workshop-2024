@@ -1,5 +1,5 @@
 import {
-  NxJsonConfiguration,
+  readNxJson,
   Tree,
   updateNxJson
 } from '@nx/devkit';
@@ -9,10 +9,9 @@ export async function updateScopeSchemaGenerator(
   tree: Tree,
   options: UpdateScopeSchemaGeneratorSchema
 ) {
-  updateNxJson(tree, (nxJson: NxJsonConfiguration) => {
-    nxJson.defaultProject = 'movies-app';
-    return nxJson;
-  })
+  const nxJson = readNxJson(tree);
+  nxJson.defaultProject = 'movies-app';
+  updateNxJson(tree, nxJson);
 }
 
 export default updateScopeSchemaGenerator;
