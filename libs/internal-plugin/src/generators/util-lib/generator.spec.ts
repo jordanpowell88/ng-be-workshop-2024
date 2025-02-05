@@ -1,20 +1,24 @@
-import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
-import { Tree, readProjectConfiguration } from '@nx/devkit';
-
-import { utilLibGenerator } from './generator';
-import { UtilLibGeneratorSchema } from './schema';
+import { UtilLibGeneratorSchema } from "./schema";
+import { createTreeWithEmptyWorkspace } from "@nx/devkit/testing";
+import { Tree, readProjectConfiguration } from "@nx/devkit";
+import generator from './generator'
 
 describe('util-lib generator', () => {
-  let tree: Tree;
-  const options: UtilLibGeneratorSchema = { name: 'test' };
+  let appTree: Tree;
+  const options: UtilLibGeneratorSchema = {
+    name: 'foo',
+    directory: 'movies'
+  }
 
   beforeEach(() => {
-    tree = createTreeWithEmptyWorkspace();
-  });
+    appTree = createTreeWithEmptyWorkspace();
+  })
 
-  it('should run successfully', async () => {
-    await utilLibGenerator(tree, options);
-    const config = readProjectConfiguration(tree, 'test');
+  it('should add util to the name and add appropriate tags', async () => {
+    await generator(appTree, options);
+    const config = readProjectConfiguration(appTree, 'movies-util-foo');
     expect(config).toBeDefined();
-  });
-});
+    expect(config.tags).toEqual(['type:util', 'scope:movies']);
+    expect(config.name).toEqual('movies-util-foo');
+  })
+})
