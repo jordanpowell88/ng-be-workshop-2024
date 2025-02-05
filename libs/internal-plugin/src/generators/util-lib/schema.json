@@ -12,7 +12,17 @@
         "index": 0
       },
       "x-prompt": "What name would you like to use?"
+    },
+    "directory": {
+      "type": "string",
+      "description": "The directory to create the util lib in",
+      "enum": ["movies", "api", "shared"],
+      "x-prompt": {
+        "message": "What directory would you like to create the util lib in (movies, api or shared)?",
+        "type": "enum",
+        "options": ["movies", "api", "shared"]
+      }
     }
   },
-  "required": ["name"]
+  "required": ["name", "directory"]
 }
