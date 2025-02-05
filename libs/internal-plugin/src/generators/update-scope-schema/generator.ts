@@ -10,9 +10,13 @@ export async function updateScopeSchemaGenerator(
   tree: Tree
 ) {
   const projects = getProjects(tree);
-
   const scopes = getScopes(projects);
+  updateSchemaJson(tree, scopes)
+  updateSchemaInterface(tree, scopes)
+  await formatFiles(tree);
+}
 
+function updateSchemaJson(tree: Tree, scopes: string[]) {
   updateJson(tree, 'libs/internal-plugin/src/generators/util-lib/schema.json',
     (schemaJson) => {
       schemaJson.properties.directory['x-prompt'].options = scopes
@@ -20,8 +24,16 @@ export async function updateScopeSchemaGenerator(
       return schemaJson
     }
   )
+}
 
-  await formatFiles(tree);
+function updateSchemaInterface(tree: Tree, scopes: string[]) {
+  const joinScopes = scopes.map((scope) => `'${scope}'`).join(' | ');
+  const interfaceDefinitionFilePath = `libs/internal-plugin/src/generators/util-lib/schema.d.ts`;
+  const newContent = `export interface UtilLibGeneratorSchema {
+    name: string;
+    directory: ${joinScopes};
+}`;
+  tree.write(interfaceDefinitionFilePath, newContent);
 }
 
 
