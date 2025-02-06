@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
-    "prepare": "husky install",
-    "update-scope-schema": "nx g @nx-workshop/internal-plugin:update-scope-schema"
+    "postinstall": "husky install",
+    "pre-commit": "npx nx g @nx-workshop/internal-plugin:update-scope-schema"
   },
   "private": true,
   "dependencies": {
