@@ -20,9 +20,9 @@
       "x-prompt": {
         "message": "What directory would you like to create the util lib in?",
         "type": "enum",
-        "options": ["api", "movies", "app", "shared"]
+        "options": ["api", "movies", "app", "internal", "shared"]
       },
-      "enums": ["api", "movies", "app", "shared"]
+      "enums": ["api", "movies", "app", "internal", "shared"]
     }
   },
   "required": ["name", "directory"]
