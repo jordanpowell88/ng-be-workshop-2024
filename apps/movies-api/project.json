@@ -50,6 +50,21 @@
       "options": {
         "jestConfig": "apps/movies-api/jest.config.ts"
       }
+    },
+    "deploy": {
+      "executor": "@nx-workshop/internal-plugin:fly-deploy",
+      "outputs": [],
+      "options": {
+        "distLocation": "dist/apps/movies-api",
+        "flyAppName": "movies-api-fragrant-water-5286"
+      },
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "self",
+          "params": "forward"
+        }
+      ]
     }
   }
 }
